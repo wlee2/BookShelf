@@ -1,23 +1,36 @@
 html, body, .root {
   height: 100%;
+  /* font: italic small-caps bold 16px/2 cursive; */
+  font: italic small-caps 16px/2 "Fira Sans", serif;
 }
 body {
   line-height: 1.5;
 }
 body, .app {
-  background: white;
+  background: aliceblue; 
+}
+
+.app {
+  border: 1px solid rgba(0,0,0,0.10);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15), 0 4px 6px rgba(0,0,0,0.20);
 }
 
 /* main page */
 
 .list-books-title {
-  padding: 10px 0;
-  background: #2e7c31;
+  padding: 10px 0 20px 0;
+  /* background: #61ac5d;
   text-align: center;
+  box-shadow: 3px 4px rgba(0,0,0,0.16), 6px 7px rgba(0,0,0,0.23); */
 }
 .list-books-title h1 {
+  background: #61ac5d;
+  text-align: center;
+  border: 1px solid rgba(0,0,0,0.10);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15), 0 4px 6px rgba(0,0,0,0.20);
   font-weight: 400;
   margin: 0;
+  padding: 10px;
   color: white;
 }
 
@@ -30,14 +43,25 @@ body, .app {
   padding: 0 10px 20px;
 }
 
+.alert-div {
+  margin: auto;
+  position: fixed;
+  width: 100%;
+  text-align: center;
+  opacity: 0.9;
+  z-index: 1;
+}
+
 @media (min-width: 600px) {
-  .bookshelf {
-    padding: 0 20px 40px;
+  .app {
+    width: 70%;
   }
+  
 }
 
 .bookshelf-title {
   border-bottom: 1px solid #dedede;
+  padding: 12px 0 5px 0;
 }
 .bookshelf-books {
   text-align: center;
@@ -48,7 +72,7 @@ body, .app {
   right: 25px;
   bottom: 25px;
 }
-.open-search a {
+.open-search button {
   display: block;
   width: 50px;
   height: 50px;
@@ -121,6 +145,7 @@ body, .app {
 
 .book {
   width: 140px;
+  margin: 10px;
 }
 .book-title,
 .book-authors {
@@ -154,11 +179,14 @@ body, .app {
   background-size: 20px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
-.book-shelf-changer select {
+.book-shelf-changer .asd {
   width: 100%;
   height: 100%;
   opacity: 0;
   cursor: pointer;
+}
+.dropdown {
+  padding: 2px 0 0 10px;
 }
 
 /* book cover */
@@ -166,10 +194,6 @@ body, .app {
   from {width: 100px; height: 80px;}
   to {width: 128px; height: 193px;}
 }
-
-/* .book {
-  
-} */
 
 .book-cover {
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);

@@ -8,5 +8,5 @@ if (!token)
 
 export const headers = {
   'Accept': 'application/json',
-  'Authorization': '123'
+  'Authorization': '1243'
 }

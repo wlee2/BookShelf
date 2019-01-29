@@ -1,11 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import './App.css'
 import axios from 'axios';
 import ShowSearchPage from './ShowSeachPage';
 import {api, headers} from './API';
-import CurrentlyReading from './Shelf/CurrentlyReading';
-import WantToRead from './Shelf/WantToRead';
-import Read from './Shelf/Read';
+import { Container, Button, Alert } from 'reactstrap';
+import ShelfModel from './Shelf/ShelfModel';
 
 class App extends Component {
   state = {
@@ -13,7 +12,9 @@ class App extends Component {
     books: [],
     read: [],
     currentlyReading: [],
-    wantToRead: [] 
+    wantToRead: [],
+    foucs: '',
+    alertting: false
   }
 
   searchPageHandler = () => {
@@ -29,6 +30,10 @@ class App extends Component {
     }
   }
 
+  componentDidMount = () => {
+    this.dataRefresh();
+  }
+
   dataRefresh = () => {
     axios.get(`${api}/books`, { headers })
       .then(res => {
@@ -36,10 +41,6 @@ class App extends Component {
           books: res.data.books
         },() => this.divByShelf())
       })
-  }
-
-  componentDidMount = () => {
-    this.dataRefresh();
   }
 
   divByShelf = () => {
@@ -51,31 +52,68 @@ class App extends Component {
     })
   }
 
+  update = (book, shelf) => {
+    // const book = {id: "nggnmAEACAAJ"}
+    // const shelf = "currentlyReading"
+    axios.put(`${api}/books/${book.id}`, JSON.stringify({ shelf }), {
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    }})
+    .then(res => console.log(res))
+    .then(() => this.dataRefresh())
+  }
+
+  onClickHandle = (e) => {
+    const shelf = e.target.name
+    const bookid = {id: e.target.value}
+    console.log("shelf: " + shelf + " id: " + e.target.value)
+    this.update(bookid, shelf)
+    this.setState({
+      focus: shelf
+    },() => {
+      this.setState({alertting: true})
+      // if(!shelf.match('none')){
+      //   console.log(document.getElementById(this.state.focus))
+      //   document.getElementById(this.state.focus).focus()
+      // }
+    })
+  }
+
+  alertting = () => {
+    if(this.state.alertting === true){
+      return <Alert color="success">Success!</Alert>
+    }
+  }
+
   render() {
     return (
-      <div className="app">
-        {this.state.showSearchPage ? (
-          <div>
-            <ShowSearchPage onClick={this.searchPageHandler}/>
-          </div>
-        ) : (
-          <div className="list-books">
-            <div className="list-books-title">
-              <h1>MyReads</h1>
+      <Fragment>
+        <div className="alert-div">
+          {this.alertting()}
+        </div>
+        <Container className="app">
+          {this.state.showSearchPage ? (
+            <div>
+              <ShowSearchPage onClick={this.searchPageHandler} clickUpdate={this.onClickHandle}/>
             </div>
-            <div className="list-books-content">
-              <div>
-                <CurrentlyReading currentlyReading={this.state.currentlyReading}/>
-                <WantToRead wantToRead={this.state.wantToRead}/>
-                <Read read={this.state.read}/>
+          ) : (
+            <div className="list-books">
+              <div className="list-books-title">
+                <h1>Welcome To The Shelf</h1>
+              </div>
+              <div className="list-books-content">  
+                  <ShelfModel shelfID="currentlyReading" shelf={"Currently Reading"} datas={this.state.currentlyReading} clickUpdate={this.onClickHandle}/>
+                  <ShelfModel shelfID="wantToRead" shelf={"Want To Read"} datas={this.state.wantToRead} clickUpdate={this.onClickHandle}/>
+                  <ShelfModel shelfID="read" shelf={"Read"} datas={this.state.read} clickUpdate={this.onClickHandle}/>
+              </div>
+              <div className="open-search">
+                <Button color="link" onClick={() => this.setState({ showSearchPage: true })}>Add a book</Button>
               </div>
             </div>
-            <div className="open-search">
-              <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
-            </div>
-          </div>
-        )}
-      </div>
+          )}
+        </Container>
+      </Fragment>
     )
   }
 }

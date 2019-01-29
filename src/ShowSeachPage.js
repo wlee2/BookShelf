@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import {api, headers} from './API';
-import BookInfo from './BookInfo'
+import BookInfo from './BookInfo';
+import {Button} from 'reactstrap'
 
 class ShowSeachPage extends Component {
   state = {
@@ -10,7 +11,6 @@ class ShowSeachPage extends Component {
   }
 
   search = (query) => {
-    const {searchData} = this.state
     axios.post(`${api}/search`, JSON.stringify({ query }), {
       headers: {
       ...headers,
@@ -42,9 +42,9 @@ class ShowSeachPage extends Component {
         color: 'darkgray'
       }
         return (
-            <div className="search-books">
+          <div className="search-books">
             <div className="search-books-bar">
-              <a className="close-search" onClick={this.props.onClick}>Close</a>
+              <Button color="link" className="close-search" onClick={this.props.onClick}></Button>
               <div className="search-books-input-wrapper">
                 <input type="text" placeholder="Search by title or author" value={this.state.search} onChange={this.handleChange}/>
 
@@ -53,7 +53,7 @@ class ShowSeachPage extends Component {
             <div className="search-books-results">
               <ol className="books-grid">
                 {
-                  searchData.length ? searchData.map((data) => <BookInfo key={data.id} data={data}/>) : 
+                  searchData.length ? searchData.map((data) => <BookInfo key={data.id} data={data} clickUpdate={this.props.clickUpdate}/>) : 
                   <h2 style={nothingColor}>There's anything here...</h2>
                 }
               </ol>
