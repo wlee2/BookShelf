@@ -162,10 +162,21 @@ body, .app {
 }
 
 /* book cover */
+@keyframes example {
+  from {width: 100px; height: 80px;}
+  to {width: 128px; height: 193px;}
+}
+
+/* .book {
+  
+} */
 
 .book-cover {
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   background: #eee;
+  animation-name: example;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
 }
 .book-cover-title {
   padding: 20px 10px 0;
