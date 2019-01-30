@@ -14,7 +14,7 @@ class App extends Component {
     read: [],
     currentlyReading: [],
     wantToRead: [],
-    foucs: '',
+    focus: '',
     alertting: false
   }
 
@@ -74,20 +74,19 @@ class App extends Component {
       focus: shelf
     },() => {
       this.setState({alertting: true},
-        () => setTimeout(()=>this.setState({alertting: false}), 3000)
-        )
-        if(!this.state.showSearchPage && !shelf.match('none')) {
-          const target = document.getElementById(this.state.focus).getBoundingClientRect();
-          const body = document.body.getBoundingClientRect();
-          const where = target.top - body.bottom
-          console.log(where)
-          animateScrollTo(where, {speed: 3000, minDuration: 3000, maxDuration: 3000});
-        }
-      // if(!shelf.match('none')){
-      //   console.log(document.getElementById(this.state.focus))
-      //   document.getElementById(this.state.focus).focus()
-      // }
+        () => setTimeout(()=>this.setState({alertting: false}), 3000))
     })
+  }
+
+  componentDidUpdate = () => {
+    const {focus} = this.state
+    if(!this.state.showSearchPage && !focus.match('none') && focus.length !== 0 ) {
+      const target = document.getElementById(this.state.focus).getBoundingClientRect();
+      const body = document.body.getBoundingClientRect();
+      const where = target.top - body.bottom
+      console.log(where)
+      animateScrollTo(where, {speed: 1000, minDuration: 2000, maxDuration: 2000});
+    }
   }
 
   toggle = () => {

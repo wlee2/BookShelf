@@ -14,7 +14,7 @@ const ShelfModel = (props) => {
                 }
                 </ol>
             </div>
-            <a href={`#${shelfID}`} id={shelfID} ></a>
+            <div id={shelfID}></div>
         </div>
     );
 };
