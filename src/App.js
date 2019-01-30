@@ -3,8 +3,9 @@ import './App.css'
 import axios from 'axios';
 import ShowSearchPage from './ShowSeachPage';
 import {api, headers} from './API';
-import { Container, Button, Alert } from 'reactstrap';
+import { Container, Button, Alert, Fade } from 'reactstrap';
 import ShelfModel from './Shelf/ShelfModel';
+import animateScrollTo from 'animated-scroll-to';
 
 class App extends Component {
   state = {
@@ -72,7 +73,16 @@ class App extends Component {
     this.setState({
       focus: shelf
     },() => {
-      this.setState({alertting: true})
+      this.setState({alertting: true},
+        () => setTimeout(()=>this.setState({alertting: false}), 3000)
+        )
+        if(!this.state.showSearchPage && !shelf.match('none')) {
+          const target = document.getElementById(this.state.focus).getBoundingClientRect();
+          const body = document.body.getBoundingClientRect();
+          const where = target.top - body.bottom
+          console.log(where)
+          animateScrollTo(where, {speed: 3000, minDuration: 3000, maxDuration: 3000});
+        }
       // if(!shelf.match('none')){
       //   console.log(document.getElementById(this.state.focus))
       //   document.getElementById(this.state.focus).focus()
@@ -80,17 +90,16 @@ class App extends Component {
     })
   }
 
-  alertting = () => {
-    if(this.state.alertting === true){
-      return <Alert color="success">Success!</Alert>
-    }
+  toggle = () => {
+    this.setState({alertting: false})
   }
+
 
   render() {
     return (
       <Fragment>
         <div className="alert-div">
-          {this.alertting()}
+          <Fade><Alert color="info" isOpen={this.state.alertting} toggle={this.toggle}>Success! - Your Book Has Been Moved</Alert></Fade>
         </div>
         <Container className="app">
           {this.state.showSearchPage ? (
@@ -100,7 +109,7 @@ class App extends Component {
           ) : (
             <div className="list-books">
               <div className="list-books-title">
-                <h1>Welcome To The Shelf</h1>
+                <h2>Welcome To The Shelf</h2>
               </div>
               <div className="list-books-content">  
                   <ShelfModel shelfID="currentlyReading" shelf={"Currently Reading"} datas={this.state.currentlyReading} clickUpdate={this.onClickHandle}/>

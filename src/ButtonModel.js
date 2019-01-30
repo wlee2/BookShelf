@@ -16,16 +16,16 @@ class ButtonModel extends Component {
     render() {
         const {clickUpdate, id} = this.props
         return (
-            <ButtonDropdown className="dropBtn" isOpen={this.state.dropToggle} toggle={this.toggle}>
+            <ButtonDropdown isOpen={this.state.dropToggle} toggle={this.toggle}>
             <DropdownToggle className="asd" caret>
             </DropdownToggle>
             <DropdownMenu>
-                <DropdownItem header>Move to...</DropdownItem>
-                <DropdownItem onClick={clickUpdate} name="currentlyReading" value={id}>Currently Reading</DropdownItem>
-                <DropdownItem onClick={clickUpdate} name="wantToRead" value={id}>Want to Read</DropdownItem>
-                <DropdownItem onClick={clickUpdate} name="read" value={id}>Read</DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem onClick={clickUpdate} name="none" value={id}>None</DropdownItem>
+                <DropdownItem className="dropBtn" header>Move to...</DropdownItem>
+                <DropdownItem className="dropBtn" onClick={clickUpdate} name="currentlyReading" value={id}>Currently Reading</DropdownItem>
+                <DropdownItem className="dropBtn" onClick={clickUpdate} name="wantToRead" value={id}>Want to Read</DropdownItem>
+                <DropdownItem className="dropBtn" onClick={clickUpdate} name="read" value={id}>Read</DropdownItem>
+                <DropdownItem className="dropBtn" divider />
+                <DropdownItem className="dropBtn" onClick={clickUpdate} name="none" value={id}>None</DropdownItem>
             </DropdownMenu>
         </ButtonDropdown>
         );

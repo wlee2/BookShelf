@@ -9,7 +9,7 @@ const ShelfModel = (props) => {
             <div className="bookshelf-books">
                 <ol className="books-grid">
                 {
-                    datas ? datas.map((data) => <BookInfo key={data.id} data={data} clickUpdate={clickUpdate}/>) :
+                    datas.length > 0 ? datas.map((data) => <BookInfo key={data.id} data={data} clickUpdate={clickUpdate}/>) :
                     <h2>There's anything here...</h2>
                 }
                 </ol>

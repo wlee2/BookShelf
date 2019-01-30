@@ -7,24 +7,23 @@ body {
   line-height: 1.5;
 }
 body, .app {
-  background: aliceblue; 
+  background: #ffc0091a; 
 }
 
 .app {
   border: 1px solid rgba(0,0,0,0.10);
   box-shadow: 0 2px 4px rgba(0,0,0,0.15), 0 4px 6px rgba(0,0,0,0.20);
+  overflow-x: auto;
 }
 
 /* main page */
 
 .list-books-title {
   padding: 10px 0 20px 0;
-  /* background: #61ac5d;
-  text-align: center;
-  box-shadow: 3px 4px rgba(0,0,0,0.16), 6px 7px rgba(0,0,0,0.23); */
 }
-.list-books-title h1 {
-  background: #61ac5d;
+
+.list-books-title h2 {
+  background: #556b2fe0;
   text-align: center;
   border: 1px solid rgba(0,0,0,0.10);
   box-shadow: 0 2px 4px rgba(0,0,0,0.15), 0 4px 6px rgba(0,0,0,0.20);
@@ -32,6 +31,7 @@ body, .app {
   margin: 0;
   padding: 10px;
   color: white;
+  border-radius: 10px;
 }
 
 .list-books-content {
@@ -42,19 +42,22 @@ body, .app {
 .bookshelf {
   padding: 0 10px 20px;
 }
+.bookshelf h2 {
+  color: darkgoldenrod;
+}
 
 .alert-div {
   margin: auto;
   position: fixed;
   width: 100%;
   text-align: center;
-  opacity: 0.9;
   z-index: 1;
+  top: 93%;
 }
 
 @media (min-width: 600px) {
   .app {
-    width: 70%;
+    width: 60%;
   }
   
 }
@@ -97,16 +100,17 @@ body, .app {
   display: flex;
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 0 6px rgba(0,0,0,0.23);
 }
+.search-books-bar button {
+  background-color: white;
+}
 .search-books-input-wrapper {
   flex: 1;
-  background: #e9e;
 }
 .search-books-bar input {
   width: 100%;
   padding: 15px 10px;
-  font-size: 1.25em;
   border: none;
-  outline: none;
+  outline: none; 
 }
 
 .close-search {
@@ -185,13 +189,13 @@ body, .app {
   opacity: 0;
   cursor: pointer;
 }
-.dropdown {
-  padding: 2px 0 0 10px;
+.dropBtn {
+  padding: 2px 0px 2px 10px !important;
 }
 
 /* book cover */
 @keyframes example {
-  from {width: 100px; height: 80px;}
+  from {width: 100px; height: 130px;}
   to {width: 128px; height: 193px;}
 }
 
@@ -199,7 +203,7 @@ body, .app {
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   background: #eee;
   animation-name: example;
-  animation-duration: 1s;
+  animation-duration: 2s;
   animation-timing-function: ease-in-out;
 }
 .book-cover-title {
