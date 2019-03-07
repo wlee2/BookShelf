@@ -14,3 +14,4 @@ In the project directory, you can run:
 &emsp; ==> for installation node-modules.
 
 ### `yarn start` 
+&emsp; ==> demo start.
