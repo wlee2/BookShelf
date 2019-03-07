@@ -7,11 +7,16 @@ This case study focused on how to put, get, update and add the data to the serve
 ### 'You can clone this project and execute with below script command.'
 In the project directory, you can run:
 
+**Note: I recommend using only one of yarn and npm for avoiding the unexpected collision!**
+
 ### `git clone <http clone url>` 
 &emsp; ==> clone this project
 
-### `yarn` 
+### `yarn` or `npm`
 &emsp; ==> for installation node-modules.
 
-### `yarn start` 
+### `yarn start` or `npm start`
 &emsp; ==> demo start.
+
+Runs the app in the development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
